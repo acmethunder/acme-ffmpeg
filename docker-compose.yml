@@ -1,0 +1,5 @@
+acmeffmpeg:
+  build: .
+  command: sh -c "npm test"
+  volumes:
+    - ./src/:/src/

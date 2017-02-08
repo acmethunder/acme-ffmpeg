@@ -1,0 +1,12 @@
+{
+    "name": "acme-ffmpeg",
+    "version": "0.0.1",
+    "description": "A Javascript wrapper for ffmpeg.",
+    "main": "ffmpeg.js",
+    "scripts": {
+        "test": "mocha --reporter spec test/"
+    },
+    "keywords": [ "ffmpeg", "ffprobe", "transcoding" ],
+    "author": "Mike D.",
+    "license": "The Unlicense"
+}
