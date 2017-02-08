@@ -1,5 +1,4 @@
 acmeffmpeg:
-  build: .
-  command: sh -c "npm test"
+  image: acmethunder/acme-ffmpeg
   volumes:
     - ./src/:/src/

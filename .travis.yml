@@ -1,0 +1,10 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker pull acmethunder/acme-ffmpeg
+
+script:
+  - docker-compose run acmeffmpeg npm test
