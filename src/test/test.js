@@ -1,10 +1,16 @@
 'use strict';
 
+if ( process.env.NODE_ENV !== 'test' ) process.env.NODE_ENV = 'test';
+
 const assert = require('assert');
 
 const ffmpegjs = require('../ffmpeg');
 
 describe('Executable paths', ()=> {
+
+    // based on the install location in the docker container
+    const EXPECTED_FFMPEG_DEFAULT_PATH = '/usr/bin/ffmpeg';
+    const EXPECTED_FFPROBE_DEFAULT_PATH = '/usr/bin/ffprobe';
 
     describe('Defaults', ()=> {
 
@@ -16,19 +22,17 @@ describe('Executable paths', ()=> {
             done();
         });
 
-        it('should be set to \'/usr/bin/ffmpeg\' for FFMPEG .', (done) => {
+        it(`should be set to '${EXPECTED_FFMPEG_DEFAULT_PATH}' for FFMPEG .`, (done) => {
 
-            const testPath = '/usr/bin/ffmpeg';
             const actualPath = ffmpegjs.currentFFMPEGPath();
-            assert.equal(testPath, actualPath);
+            assert.equal(EXPECTED_FFMPEG_DEFAULT_PATH, actualPath);
             done();
         });
 
-        it('should be set to \'/usr/bin/ffprobe\' for FFPROBE', (done) => {
+        it(`should be set to '${EXPECTED_FFPROBE_DEFAULT_PATH}' for FFPROBE`, (done) => {
 
-            const testPath = '/usr/bin/ffprobe';
             const actualPath = ffmpegjs.currentFFPROBEPath();
-            assert.equal(testPath, actualPath);
+            assert.equal(EXPECTED_FFPROBE_DEFAULT_PATH, actualPath);
             done();
         });
     });
@@ -68,6 +72,8 @@ describe('Executable paths', ()=> {
         it('should reset FFMPEG path back to default', (done) => {
 
             const defaultPath = ffmpegjs.currentFFMPEGPath();
+            assert.equal(EXPECTED_FFMPEG_DEFAULT_PATH, defaultPath);
+
             const customPath = ffmpegjs.setFFMPEGPath(CUSTOM_FFMPEG_PATH);
             assert.equal(CUSTOM_FFMPEG_PATH, customPath);
             assert.notEqual(defaultPath, customPath);
@@ -80,6 +86,8 @@ describe('Executable paths', ()=> {
         it('should reset FFPROBE path back to default', (done) => {
 
             const defaultPath = ffmpegjs.currentFFPROBEPath();
+            assert.equal(EXPECTED_FFPROBE_DEFAULT_PATH, defaultPath);
+
             const customPath = ffmpegjs.setFFPROBEPath(CUSTOM_FFPROBE_PATH);
             assert.equal(CUSTOM_FFPROBE_PATH, customPath);
             assert.notEqual(defaultPath, customPath);
