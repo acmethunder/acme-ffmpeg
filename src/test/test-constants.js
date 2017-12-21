@@ -10,4 +10,7 @@ module.exports.CONSTANTS = {
     AUDIO_CODEC_PCM_S16BE: 'pcm_s16be',
     OWL_AUDIO_DURATION: 75.861063,
     ELLIPSIS: 0.00001,
+    BAD_VIDEO: {
+        FILE_PATH: 'test_media/bad_video.mov',
+    }
 };

@@ -45,7 +45,7 @@ describe('MediaItem Class', () => {
             done();
         });
 
-        it('should load video meta data', (done) => {
+        it('should load video meta data - video: h264, audio: aac', (done) => {
 
             // test meta data originally captured with ffprobe
             const mediaItem = new MediaItem(TEST_FILE);
@@ -58,6 +58,16 @@ describe('MediaItem Class', () => {
             assert.strictEqual(TEST_CONSTANTS.VIDEO_H264_CODEC, mediaItem.videoCodec());
             assert.strictEqual(TEST_CONSTANTS.AUDIO_CODEC_AAC, mediaItem.audioCodec());
             assert(Math.abs(TEST_CONSTANTS.VIDEO_64_DURATION - mediaItem.duration()) <= TEST_CONSTANTS.ELLIPSIS);
+            done();
+        });
+
+        it.only('should not have any meta data - bad video file', (done) => {
+
+            const TEST_BAD_VIDEO_FILE = TEST_CONSTANTS.BAD_VIDEO.FILE_PATH;
+            const mediaItem = new MediaItem(TEST_BAD_VIDEO_FILE);
+            assert.deepStrictEqual(TEST_BAD_VIDEO_FILE, mediaItem.sourceFile);
+            assert.strictEqual({}, mediaItem.metaData);
+
             done();
         });
     });
